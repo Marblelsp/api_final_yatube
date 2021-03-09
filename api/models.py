@@ -1,7 +1,17 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models.fields.related import ForeignKey
 
 User = get_user_model()
+
+
+class Group(models.Model):
+    title = models.CharField("Заголовок", max_length=200)
+    slug = models.SlugField
+    description = models.TextField
+
+    def __str__(self):
+        return self.title
 
 
 class Post(models.Model):
@@ -11,6 +21,15 @@ class Post(models.Model):
     )
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="posts"
+    )
+    group = models.ForeignKey(
+        Group,
+        on_delete=models.CASCADE,
+        related_name="group_posts",
+        verbose_name="Группа",
+        blank=True,
+        null=True,
+        help_text="Укажите группу",
     )
 
     def __str__(self):
@@ -28,3 +47,10 @@ class Comment(models.Model):
     created = models.DateTimeField(
         "Дата добавления", auto_now_add=True, db_index=True
     )
+
+
+class Follow(models.Model):
+    user = ForeignKey(User, on_delete=models.CASCADE,
+                      related_name="follower")
+    following = ForeignKey(User, on_delete=models.CASCADE,
+                           related_name="following")

@@ -18,3 +18,8 @@ __pycache__/
 media/
 
 db.sqlite3
+static/
+static
+pytest.ini
+README.md
+setup.cfg
