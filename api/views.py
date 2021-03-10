@@ -48,6 +48,7 @@ class GroupViewSet(mixins.CreateModelMixin,
     serializer_class = GroupSerializer
     permission_classes = [IsAuthorOrReadOnly, IsAuthenticatedOrReadOnly]
 
+
 class FollowViewSet(mixins.CreateModelMixin,
                     mixins.ListModelMixin,
                     viewsets.GenericViewSet):

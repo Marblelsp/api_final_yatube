@@ -53,4 +53,4 @@ class Follow(models.Model):
     user = ForeignKey(User, on_delete=models.CASCADE,
                       related_name="follower")
     following = OneToOneField(User, on_delete=models.CASCADE,
-                           related_name="following")
+                              related_name="following")
