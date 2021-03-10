@@ -5,7 +5,7 @@ from rest_framework.filters import SearchFilter
 from rest_framework.permissions import (IsAuthenticated,
                                         IsAuthenticatedOrReadOnly)
 
-from .models import Comment, Follow, Group, Post, User
+from .models import Follow, Group, Post, User
 from .permissions import IsAuthorOrReadOnly
 from .serializers import (
     CommentSerializer, FollowSerializer, GroupSerializer, PostSerializer)
@@ -26,7 +26,6 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthorOrReadOnly, IsAuthenticatedOrReadOnly]
 
@@ -47,8 +46,7 @@ class GroupViewSet(mixins.CreateModelMixin,
                    viewsets.GenericViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    http_method_names = ('get', 'post')
-
+    permission_classes = [IsAuthorOrReadOnly, IsAuthenticatedOrReadOnly]
 
 class FollowViewSet(mixins.CreateModelMixin,
                     mixins.ListModelMixin,
@@ -57,11 +55,10 @@ class FollowViewSet(mixins.CreateModelMixin,
     serializer_class = FollowSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [SearchFilter]
-    http_method_names = ('get', 'post')
     search_fields = ['user__username', 'following__username']
 
     def get_queryset(self):
-        user = get_object_or_404(User, username=self.request.user)
+        user = User.objects.get(username=self.request.user)
         return Follow.objects.filter(following=user)
 
     def perform_create(self, serializer):

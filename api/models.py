@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models.fields.related import ForeignKey
+from django.db.models.fields.related import ForeignKey, OneToOneField
 
 User = get_user_model()
 
@@ -52,5 +52,5 @@ class Comment(models.Model):
 class Follow(models.Model):
     user = ForeignKey(User, on_delete=models.CASCADE,
                       related_name="follower")
-    following = ForeignKey(User, on_delete=models.CASCADE,
+    following = OneToOneField(User, on_delete=models.CASCADE,
                            related_name="following")
