@@ -7,8 +7,6 @@ User = get_user_model()
 
 class Group(models.Model):
     title = models.CharField("Заголовок", max_length=200)
-    slug = models.SlugField
-    description = models.TextField
 
     def __str__(self):
         return self.title
@@ -52,5 +50,12 @@ class Comment(models.Model):
 class Follow(models.Model):
     user = ForeignKey(User, on_delete=models.CASCADE,
                       related_name="follower")
-    following = OneToOneField(User, on_delete=models.CASCADE,
-                              related_name="following")
+    following = ForeignKey(User, on_delete=models.CASCADE,
+                           related_name="following")
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "following"],
+                name="unique_author_user_following")
+        ]
