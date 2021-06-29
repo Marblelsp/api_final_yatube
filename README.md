@@ -54,14 +54,16 @@ python manage.py runserver
 С помощью команды pytest вы можете запустить тесты и проверить работу модулей
 Аутентификация
 
-Выполните POST-запрос localhost:8000/api/v1/token/ передав поля username и password.
+Выполните POST-запрос http://localhost:8000/api/v1/token/ передав поля username и password.
 
 API вернет JWT-токен в формате:
 
+```json
 {
     "refresh": "ХХХХХХХХХХХ",
     "access": "ХХХХХХХХХХХХ"
 }
+```
 
 Токен вернётся в поле access, а данные из поля refresh нужны для обновления токена
 
@@ -70,9 +72,12 @@ API вернет JWT-токен в формате:
 Пример http-запроса (POST) для создания поста:
 
 url = 'http://127.0.0.1/api/v1/posts/'
+
+```json
 data = {'text': 'Your post'}
 headers = {'Authorization': 'Bearer your_token'}
 request = requests.post(url, data=data, headers=headers)
+```
 
 Ответ API_Yatube:
 
