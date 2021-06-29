@@ -92,11 +92,9 @@ request = requests.post(url, data=data, headers=headers)
 ```
 Пример http-запроса (GET) для получения списка постов:
 
-
 url = 'http://127.0.0.1:8000/api/v1/posts/'
 
 headers = {'Authorization': 'Bearer your_token'}
-request = requests.get(api, headers=headers)
 
 Ответ API_Yatube:
 Статус- код 200
