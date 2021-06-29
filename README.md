@@ -2,22 +2,21 @@
 
 REST API для мини социальной сети Yatube, созданной в рамках учебного курса Яндекс.Практикум
 Аутентификация по JWT-токену
-
-Работает со всеми модулями социальной сети Yatube: постами, комментариями, группами, подписчиками
-
+Работает со всеми модулями социальной сети Yatube: постами, комментариями, группами, подписчиками.
 Предоставляет данные в формате JSON
+
 ----
 
 Стек технологий
-    * Python +Django REST Framework
-    * библиотека Simple JWT - работа с JWT-токеном
-    * система управления версиями - git
+* Python +Django REST Framework
+* библиотека Simple JWT - работа с JWT-токеном
+* система управления версиями - git
 
 Как запустить проект:
     Клонируйте репозитроий с проектом:
 
 ```python
-git clone https://github.com/leks20/api_yatube
+git clone https://github.com/Marblelsp/api_final_yatube
 ```
     В созданной директории установите виртуальное окружение, активируйте его и установите необходимые зависимости:
 
@@ -34,7 +33,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-    Создайте суперпользователя:
+Создайте суперпользователя:
 
 ```python
 python manage.py createsuperuser
@@ -84,20 +83,25 @@ request = requests.post(url, data=data, headers=headers)
   "pub_date": "2020-08-20T14:15:22Z"
 }
 ```
-Пример http-запроса (GET) для получения списка подписчиков:
+Пример http-запроса (GET) для получения списка постов:
 
-url = 'http://127.0.0.1:8000/api/v1/follow/'
+
+url = 'http://127.0.0.1:8000/api/v1/posts/'
+
 headers = {'Authorization': 'Bearer your_token'}
 request = requests.get(api, headers=headers)
 
 Ответ API_Yatube:
-
 Статус- код 200
+
 ```json
 [
-  {
-    "user": "string",
-    "following": "string"
-  }
+    {
+        "id": 1,
+        "author": "admin",
+        "text": "Очень важный пост",
+        "pub_date": "2021-06-29T09:54:18.773484Z",
+        "group": null
+    }
 ]
 ```
