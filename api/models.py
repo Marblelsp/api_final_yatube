@@ -6,6 +6,7 @@ User = get_user_model()
 
 
 class Group(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField("Заголовок", max_length=200)
 
     def __str__(self):
@@ -13,6 +14,7 @@ class Group(models.Model):
 
 
 class Post(models.Model):
+    id = models.AutoField(primary_key=True)
     text = models.TextField()
     pub_date = models.DateTimeField(
         "Дата публикации", auto_now_add=True
@@ -35,6 +37,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="comments"
     )
@@ -48,6 +51,7 @@ class Comment(models.Model):
 
 
 class Follow(models.Model):
+    id = models.AutoField(primary_key=True)
     user = ForeignKey(User, on_delete=models.CASCADE,
                       related_name="follower")
     following = ForeignKey(User, on_delete=models.CASCADE,
