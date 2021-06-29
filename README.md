@@ -73,7 +73,7 @@ API вернет JWT-токен в формате:
 
 url = 'http://127.0.0.1/api/v1/posts/'
 
-```json
+```pyton
 data = {'text': 'Your post'}
 headers = {'Authorization': 'Bearer your_token'}
 request = requests.post(url, data=data, headers=headers)
